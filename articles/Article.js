@@ -17,6 +17,9 @@ const Article = connection.define('articles', {
 })
 Category.hasMany(Article);
 Article.belongsTo(Category);
+// Article.sync({force: true}).then(()=>{
+//     console.log("Articles created");
+// }).catch((error) => console.log(error));
 
 
 

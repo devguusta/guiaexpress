@@ -23,6 +23,7 @@ router.post("/categories/save", (req, res) => {
 
 router.get("/admin/categories", (req, res)=> {
     Category.findAll().then(categories => {
+        console.log(categories);
         res.render("admin/categories/index", {categories: categories});
     })
   

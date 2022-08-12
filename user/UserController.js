@@ -40,7 +40,36 @@ router.post("/users/create", async (req, res) => {
     }).catch((err) => {
         res.redirect("/")
     })
-   
+})
+router.get("/login", async (req,res) => {
+    res.render("admin/users/login");
+})
+
+router.post("/authenticate", async (req,res) => {
+    var email = req.body.email
+    var password = req.body.password
+
+    var userExist = await User.findOne({
+        where: {email: email}
+    })
+console.log(userExist)
+        if(userExist != undefined) {
+        var correct = bcrypt.compareSync(password, userExist.password);
+
+        if(correct){
+            req.session.user = {
+            
+                email: userExist.email,
+                id: userExist.id
+            }
+            res.json({
+                user: req.session.user
+            })
+        }
+
+    } else {
+        res.redirect("login");
+    }
 
 })
 module.exports = router;

@@ -19,9 +19,13 @@ app.set('view engine', 'ejs');
 app.use(session({
     secret: "sdikasdiajs",
     cookie: {
-        maxAge: 30000
+        maxAge: 3600000
+        
     }
 }))
+
+
+
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

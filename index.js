@@ -7,11 +7,21 @@ const connection = require("./database/database");
 const categoriesController = require("./categories/CategoriesController");
 const articlesController = require("./articles/ArticlesController");
 const userController = require("./user/UserController");
+
 const Article = require("./articles/Article");
 const Category = require("./categories/Category");
 const User = require("./user/User");
 
+const session = require("express-session");
+
+
 app.set('view engine', 'ejs');
+app.use(session({
+    secret: "sdikasdiajs",
+    cookie: {
+        maxAge: 30000
+    }
+}))
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
